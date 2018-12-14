@@ -6,11 +6,9 @@ public class GameController implements  IGameController {
 
     private ArrayList<IPlayer> players = new ArrayList<>();
     private int currentPlayer;
-    private int minimumBet;
 
     public GameController(){
         currentPlayer = 0;
-        minimumBet = 0;
     }
 
     @Override
@@ -19,13 +17,8 @@ public class GameController implements  IGameController {
     }
 
     @Override
-    public void nextTurn() {
+    public void nextPlayer() {
         currentPlayer = (currentPlayer + 1) % players.size();
-    }
-
-    @Override
-    public int getMinimumBet() {
-        return minimumBet;
     }
 
     @Override
@@ -34,12 +27,14 @@ public class GameController implements  IGameController {
     }
 
     @Override
-    public void setMinimumBet(int newMinimumBet) throws GameException {
-        if (newMinimumBet <= minimumBet) {
-            throw new GameException("the new bet need to increase the old bet");
+    public int getMaxBet() {
+        int max = 0;
+        for(int i= 0; i< players.size(); i++){
+            int bet = players.get(i).getBet();
+            if(bet > max){
+                max = bet;
+            }
         }
-
-        minimumBet = newMinimumBet;
-
+        return max;
     }
 }

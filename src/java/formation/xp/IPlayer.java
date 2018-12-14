@@ -11,4 +11,5 @@ public interface IPlayer {
 
     Card[] getCards();
     int getMoney();
+    int getBet();
 }

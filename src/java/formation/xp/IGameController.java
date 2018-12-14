@@ -1,9 +1,8 @@
 package formation.xp;
 
 public interface IGameController {
+    int getMaxBet();
+    void nextPlayer();
     IPlayer getCurrentPlayer();
-    void nextTurn();
-    int getMinimumBet();
     void addPlayer(IPlayer player);
-    void setMinimumBet(int minimumBet) throws GameException;
 }

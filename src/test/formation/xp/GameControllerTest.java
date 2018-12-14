@@ -11,20 +11,16 @@ public class GameControllerTest extends TestCase {
         Player player1 = new Player(100, controller),
                 player2 = new Player(100, controller);
         assertEquals(player1, controller.getCurrentPlayer());
-        controller.nextTurn();
+        controller.nextPlayer();
         assertEquals(player2, controller.getCurrentPlayer());
     }
 
     @Test
-    public void testMinimumBetAtTheBeginingOfTheGame() throws GameException {
+    public void testGetMaxBet() throws GameException{
         GameController controller = new GameController();
-        assertEquals(0, controller.getMinimumBet());
-    }
+        Player player1 = new Player(100, controller);
 
-    @Test
-    public void testSetMinimumBet() throws GameException {
-        GameController controller = new GameController();
-        controller.setMinimumBet(10);
-        assertEquals(10, controller.getMinimumBet());
+        player1.firstBet(10);
+        assertEquals( 10, controller.getMaxBet());
     }
 }

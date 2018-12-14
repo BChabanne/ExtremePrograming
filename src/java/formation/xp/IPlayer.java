@@ -1,7 +1,14 @@
 package formation.xp;
 
-public Interface Player {
+public interface IPlayer {
 
-    public void getCard(Card newCard) throws GameException; 
-    public void bet(int newBet) throws GameException;
+    void drawCards(Card card1, Card card2);
+    void firstBet(int initialBet) throws GameException;
+    void call() throws GameException;
+    void raise(int newBetValue) throws GameException;
+    void allIn();
+    void check();
+
+    Card[] getCards();
+    int getMoney();
 }

@@ -43,5 +43,25 @@ public class GameControllerTest extends TestCase {
         assertEquals(firstPlayer, controller.getCurrentPlayer());
     }
 
+    @Test
+    public void testIsBankrupt() throws GameException {
+        GameController controller = new GameController();
+        controller.addPlayers(2, 100);
 
+        //player 1 goes bankrupt
+        controller.getCurrentPlayer().allIn();
+
+        //player 2
+        controller.nextPlayer();
+        IPlayer player2 = controller.getCurrentPlayer();
+        
+        //assert that next player is player 2 because player 1 is bankrupt
+        controller.nextPlayer();
+        IPlayer current = controller.getCurrentPlayer();
+
+        assertEquals(current, player2);
+
+
+
+    }
 }

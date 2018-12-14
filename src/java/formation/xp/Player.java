@@ -33,19 +33,27 @@ public class Player implements IPlayer {
     public void call() throws GameException {
         int minimumBet = gameController.getMinimumBet();
         if(money < minimumBet){
-            throw new GameException("Impossible to call. Player doesn't have engough money");
+            throw new GameException("Impossible to call. Player doesn't have enough money");
         }
         money -= minimumBet;
     }
 
     @Override
-    public void raise(int newBetValue) {
+    public void raise(int newBetValue) throws GameException {
+        if (newBetValue <= gameController.getMinimumBet())
+            throw new GameException("Impossible to raise, new bet is lower than the old one");
+        else if (money < newBetValue)
+            throw new GameException("Impossible to raise, player doesn't have enough money");
 
+        gameController.setMinimumBet(newBetValue);
+        money -= newBetValue;
     }
 
     @Override
-    public void allIn() {
-
+    public int allIn() {
+        int betMoney = money;
+        money = 0;
+        return betMoney;
     }
 
     @Override

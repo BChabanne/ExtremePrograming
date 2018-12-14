@@ -6,7 +6,7 @@ public interface IPlayer {
     void firstBet(int initialBet) throws GameException;
     void call() throws GameException;
     void raise(int newBetValue) throws GameException;
-    void allIn();
+    int allIn();
     void check();
 
     Card[] getCards();

@@ -23,4 +23,25 @@ public class GameControllerTest extends TestCase {
         player1.firstBet(10);
         assertEquals( 10, controller.getMaxBet());
     }
+
+    @Test
+    public void testGameWith5Players() throws GameException {
+        int numberPlayer = 5;
+        GameController controller = new GameController();
+        controller.addPlayers(numberPlayer, 100);
+
+        IPlayer firstPlayer = controller.getCurrentPlayer();
+
+        for(int i =0; i< numberPlayer - 1; i++){
+            controller.nextPlayer();
+        }
+
+        assertNotSame(firstPlayer, controller.getCurrentPlayer());
+
+        controller.nextPlayer();
+
+        assertEquals(firstPlayer, controller.getCurrentPlayer());
+    }
+
+
 }

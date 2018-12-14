@@ -12,12 +12,22 @@ public class GameController implements  IGameController {
     }
 
     @Override
+    public void addPlayers(int numberPlayer, int startingMoney) {
+        for(int i =0; i< numberPlayer; i++){
+            new Player(startingMoney, this);
+        }
+    }
+
+    @Override
     public IPlayer getCurrentPlayer() {
         return players.get(currentPlayer);
     }
 
     @Override
-    public void nextPlayer() {
+    public void nextPlayer() throws GameException {
+        if (players.size() == 0)
+            throw new GameException("No player");
+
         currentPlayer = (currentPlayer + 1) % players.size();
     }
 

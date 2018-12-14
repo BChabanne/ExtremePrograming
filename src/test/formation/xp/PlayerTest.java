@@ -127,4 +127,32 @@ public class PlayerTest extends TestCase {
 		player1.firstBet(10);
 		assertEquals(10, player1.getBet());
 	}
+
+	@Test
+	public void testCheck() throws GameException {
+		GameController controller = new GameController();
+		Player player1 = new Player(100, controller),
+				player2 = new Player(100, controller);
+
+		player1.firstBet(10);
+		player2.call();
+		player1.check();
+
+		assertEquals(10, player1.getBet());
+
+	}
+
+	@Test
+	public void testCheckThrowsException() throws GameException {
+		GameController controller = new GameController();
+		Player player1 = new Player(100, controller),
+				player2 = new Player(100, controller);
+		try {
+			player1.firstBet(10);
+			player2.check();
+			fail("player shouldn't check if his current bet is not high enough");
+		} catch ( GameException e) {
+			assert true;
+		}
+	}
 }

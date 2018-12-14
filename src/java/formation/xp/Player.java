@@ -64,7 +64,10 @@ public class Player implements IPlayer {
     }
 
     @Override
-    public void check() {
+    public void check() throws GameException {
+        if (currentBet < gameController.getMaxBet())    {
+            throw new GameException("Current bet is not high enough to check");
+        }
 
     }
 
